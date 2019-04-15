@@ -5,13 +5,14 @@
 # Create Time: 2017/11/08 07:43
 # TODO:
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
-from __future__ import division
-from __future__ import print_function
+from __future__ import absolute_import #忽略掉同目录的xxx.py而引入系统自带的标准xxx.py
+from __future__ import unicode_literals #模块中显式出现的所有字符串转为unicode类型
+from __future__ import division #"/"操作符执行的是截断除法3/4=0,当我们导入精确除法之后，"/"执行的是精确除法3/4=0.75
+from __future__ import print_function #即使在python2.X，使用print就得像python3.X那样加括号使用。
+#加上这些，如果你的python版本是python2.X，你也得按照python3.X那样使用这些函数。
 
 import time
-import argparse
+import argparse #用于解析命令行参数和选项的标准模块
 import numpy as np
 
 import torch
