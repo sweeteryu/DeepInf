@@ -23,20 +23,20 @@ from torch.utils.data import DataLoader
 from gcn import BatchGCN
 from gat import BatchGAT
 from pscn import BatchPSCN
-from sklearn.metrics import precision_recall_fscore_support
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import precision_recall_fscore_support #为每个类计算precision、recall、F-measure、support
+from sklearn.metrics import roc_auc_score #直接根据真实值、预测值计算出AUC值（计算ROC的过程省略）
+from sklearn.metrics import precision_recall_curve #根据预测值和真实值计算一条precision-recall曲线
 from data_loader import ChunkSampler
 from data_loader import InfluenceDataSet
 from data_loader import PatchySanDataSet
 
-import os
-import shutil
-import logging
-from tensorboard_logger import tensorboard_logger
+import os #处理文件和目录的操作模块
+import shutil #高级的文件、文件夹、压缩包处理模块
+import logging #输出运行日志，可以设置输出日志的等级、保存路径、文件回滚等
+from tensorboard_logger import tensorboard_logger #实现tensorboard可视化
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s') # include timestamp
+logger = logging.getLogger(__name__) #返回一个名称为__name__的logger实例，一般name是各模块名。初始化
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s') # include timestamp 打印日志时间，和日志信息
 
 # Training settings
 parser = argparse.ArgumentParser()
