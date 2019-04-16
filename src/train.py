@@ -39,7 +39,8 @@ logger = logging.getLogger(__name__) #返回一个名称为__name__的logger实�
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s') # include timestamp 打印日志时间，和日志信息
 
 # Training settings
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser() #创建解析器对象ArgumentParser，可以添加参数
+#add_argument()方法，用来指定程序需要接受的命令参数
 parser.add_argument('--tensorboard-log', type=str, default='', help="name of this run")
 parser.add_argument('--model', type=str, default='gcn', help="models used")
 parser.add_argument('--no-cuda', action='store_true', default=False, help='Disables CUDA training.')
@@ -74,12 +75,13 @@ parser.add_argument('--neighbor-size', type=int, default=5,
                     help="Neighborhood size (only useful for pscn)")
 
 args = parser.parse_args()
-args.cuda = not args.no_cuda and torch.cuda.is_available()
+args.cuda = not args.no_cuda and torch.cuda.is_available() #（GPU是否可用）
 
 np.random.seed(args.seed)
-torch.manual_seed(args.seed)
+torch.manual_seed(args.seed) #为CPU设置种子用于生成随机数，以使得结果是确定的
 if args.cuda:
     torch.cuda.manual_seed(args.seed)
+    # 为当前GPU设置随机种子；如果使用多个GPU，应该使用torch.cuda.manual_seed_all()为所有的GPU设置种子。
 
 tensorboard_log_dir = 'tensorboard/%s_%s' % (args.model, args.tensorboard_log)
 os.makedirs(tensorboard_log_dir, exist_ok=True)
